@@ -14,3 +14,6 @@ services:
 
   php-cli:
     image: 'php:7.3-cli'
+    working_dir: '/usr/src/myapp'
+    volumes:
+      - './:/usr/src/myapp'
