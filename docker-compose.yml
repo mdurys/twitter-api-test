@@ -1,0 +1,16 @@
+version: '3.6'
+
+services:
+
+  nginx:
+    image: 'nginx:stable'
+    ports:
+      - '8080:80'
+    depends_on:
+      - php
+
+  php:
+    image: 'php:7.3-fpm'
+
+  php-cli:
+    image: 'php:7.3-cli'
