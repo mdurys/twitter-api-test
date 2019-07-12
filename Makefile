@@ -1,4 +1,5 @@
-PHPCLI = docker-compose run --user $(shell id -u):$(shell id -g) php-cli php
+UID_GID = $(shell id -u):$(shell id -g)
+PHPCLI = docker-compose run --user $(UID_GID) php-cli php
 
 start:
 	docker-compose up -d
@@ -7,10 +8,10 @@ stop:
 	docker-compose down -v
 
 build:
-	docker run --rm --interactive --tty --volume "$(PWD)":/app --user $(id -u):$(id -g) composer --optimize-autoloader install
+	docker-compose run --rm --user $(UID_GID) composer --optimize-autoloader install
 
 test:
 	$(PHPCLI) vendor/bin/phpunit
 
-spec:
+specs:
 	$(PHPCLI) vendor/bin/phpspec run
